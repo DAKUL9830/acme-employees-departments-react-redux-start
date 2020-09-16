@@ -1,6 +1,7 @@
 import thunks from 'redux-thunk'
 import {createStore,applyMiddleware} from 'redux'
 import {createLogger} from 'redux-logger'
+import axios from 'axios';
 
 
 
@@ -11,14 +12,28 @@ const ADD_DEPARTMENTS='ADD_DEPARTMENTS'
 
  export const removeFromDepartmentAction=(employee)=>({type:REMOVE,data:employee})
  export const destroyEmployeeAction=(employee)=>({type:DESTROY,data:employee})
- export const fetchEmployees=(employees)=>({type:'ADD_EMPLOYEES',data:employees});
- export const fetchDepartments=(departments)=>({type:'ADD_DEPARTMENTS',data:departments});
+  const setfetchEmployees=(employees)=>({type:ADD_EMPLOYEES,data:employees});
+  const setfetchDepartments=(departments)=>({type:ADD_DEPARTMENTS,data:departments});
 
 const initialState={
     departments: [],
      employees: [],
 
 }
+export const fetchEmployees=()=>{
+    return async (dispatch)=>{
+        const {data}=await axios.get('/api/employees')
+        dispatch(setfetchEmployees(data))
+    }
+}
+
+export const fetchDepartments=()=>{
+    return async (dispatch)=>{
+        const {data}=await axios.get('/api/departments')
+        dispatch(setfetchDepartments(data))
+    }
+}
+
 
 
 

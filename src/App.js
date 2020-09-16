@@ -63,10 +63,10 @@ class App extends React.Component{
 //     });
 //   }
      async componentDidMount(){
-      const employees= await axios.get('/api/employees');
-      const departments=await axios.get('/api/departments');
-      this.props.fetchEmp(employees.data);
-      this.props.fetchDep(departments.data);
+      //const employees= await axios.get('/api/employees');
+      //const departments=await axios.get('/api/departments');
+      this.props.fetchEmp();  //employees.data
+      this.props.fetchDep();  //departments.data
 
     }
     // fetchData(){
